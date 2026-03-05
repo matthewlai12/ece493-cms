@@ -1,0 +1,187 @@
+openapi: 3.0.3
+info:
+  title: CMS API
+  version: 1.0.0
+servers:
+  - url: /api
+paths:
+  /announcements:
+    get:
+      summary: List public announcements
+      responses:
+        '200':
+          description: OK
+  /registration-prices:
+    get:
+      summary: List conference registration prices
+      responses:
+        '200':
+          description: OK
+  /schedule:
+    get:
+      summary: View published schedule (public)
+      responses:
+        '200':
+          description: OK
+  /auth/register:
+    post:
+      summary: Register user account
+      responses:
+        '201':
+          description: Created
+  /auth/login:
+    post:
+      summary: Log in to system
+      responses:
+        '200':
+          description: OK
+  /auth/password:
+    post:
+      summary: Change password
+      responses:
+        '200':
+          description: OK
+  /submissions:
+    post:
+      summary: Submit paper manuscript
+      responses:
+        '201':
+          description: Created
+  /submissions/{submissionId}:
+    patch:
+      summary: Save submission progress
+      parameters:
+        - in: path
+          name: submissionId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  /submissions/{submissionId}/files:
+    post:
+      summary: Upload manuscript file
+      parameters:
+        - in: path
+          name: submissionId
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Uploaded
+  /decisions/{submissionId}:
+    post:
+      summary: Record final paper decision
+      parameters:
+        - in: path
+          name: submissionId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  /schedule/generate:
+    post:
+      summary: Generate conference schedule
+      responses:
+        '200':
+          description: OK
+  /schedule/{scheduleId}:
+    patch:
+      summary: Edit or modify conference schedule
+      parameters:
+        - in: path
+          name: scheduleId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  /schedule/{scheduleId}/publish:
+    post:
+      summary: Publish final conference schedule
+      parameters:
+        - in: path
+          name: scheduleId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  /referee/invitations:
+    get:
+      summary: List referee invitations
+      responses:
+        '200':
+          description: OK
+  /referee/invitations/{invitationId}/response:
+    post:
+      summary: Accept or reject review invitation
+      parameters:
+        - in: path
+          name: invitationId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  /referee/assignments:
+    get:
+      summary: Access assigned papers
+      responses:
+        '200':
+          description: OK
+  /reviews:
+    post:
+      summary: Submit paper review
+      responses:
+        '201':
+          description: Created
+  /referees/assignments:
+    post:
+      summary: Assign referees to submitted papers
+      responses:
+        '200':
+          description: OK
+  /referees/assignments/validate:
+    post:
+      summary: Enforce reviewer workload limit and ensure three reviewers per paper
+      responses:
+        '200':
+          description: OK
+  /registrations:
+    post:
+      summary: Register for conference
+      responses:
+        '201':
+          description: Created
+  /registrations/{registrationId}/payment:
+    post:
+      summary: Pay conference registration fee
+      parameters:
+        - in: path
+          name: registrationId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  /registrations/{registrationId}/confirmation:
+    get:
+      summary: Receive payment confirmation ticket
+      parameters:
+        - in: path
+          name: registrationId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
